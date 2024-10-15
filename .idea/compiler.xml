@@ -9,5 +9,10 @@
         <module name="MachineLearningInKnowledgeGraphs" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="MachineLearningInKnowledgeGraphs (1)" target="1.8" />
+      <module name="ontology-module" target="1.8" />
+      <module name="OntologyModule" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
