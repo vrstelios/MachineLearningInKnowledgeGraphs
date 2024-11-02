@@ -1,3 +1,6 @@
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.RDFXMLDocumentFormat;
@@ -7,6 +10,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.StringReader;
 
 public class Ontology {
 
@@ -46,7 +50,7 @@ public class Ontology {
             String rdfString = baos.toString("UTF-8");
 
             // Read ontology with jena from RDF String
-            /*Model model = ModelFactory.createDefaultModel();
+            Model model = ModelFactory.createDefaultModel();
             model.read(new StringReader(rdfString), null, "RDF/XML");
 
             // Execute SPARQL query
@@ -54,7 +58,7 @@ public class Ontology {
             QueryExecution qexec = QueryExecutionFactory.create(query, model);
 
             ResultSet results = qexec.execSelect();
-            ResultSetFormatter.out(System.out, results, query);*/
+            ResultSetFormatter.out(System.out, results, query);
 
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
