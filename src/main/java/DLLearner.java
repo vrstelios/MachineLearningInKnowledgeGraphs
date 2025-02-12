@@ -21,18 +21,17 @@ public class DLLearner {
     private static final Logger logger = Logger.getLogger(DLLearner.class); //για να καταγράφει μηνύματα (logs) διαφόρων σταδίων της διαδικασίας
     private static final String kbPathStr = "biopax2/Homo_sapiens.owl";
     private static final List<String> posExampleUris = new ArrayList<>(Arrays.asList(
-            "http://www.reactome.org/biopax/48887#unificationXref6971",
-            "http://www.reactome.org/biopax/48887#unificationXref69710",
-            "http://www.reactome.org/biopax/48887#unificationXref69711",
-            "http://www.reactome.org/biopax/48887#unificationXref69712",
-            "http://www.reactome.org/biopax/48887#unificationXref69713"
+            "http://www.reactome.org/biopax/48887#physicalEntityParticipant46853",
+            "http://www.reactome.org/biopax/48887#sequenceParticipant35130",
+            "http://www.reactome.org/biopax/48887#sequenceParticipant27340",
+            "http://www.reactome.org/biopax/48887#physicalEntityParticipant5344"
     ));
     private static final List<String> negExampleUris = new ArrayList<>(Arrays.asList(
-            "http://www.reactome.org/biopax/48887#unificationXref9995",
-            "http://www.reactome.org/biopax/48887#unificationXref9996",
-            "http://www.reactome.org/biopax/48887#unificationXref9997",
-            "http://www.reactome.org/biopax/48887#unificationXref9998",
-            "http://www.reactome.org/biopax/48887#unificationXref9999"
+            "http://www.reactome.org/biopax/48887#protein7672",
+            "http://www.reactome.org/biopax/48887#protein4276",
+            "http://www.reactome.org/biopax/48887#protein7148",
+            "http://www.reactome.org/biopax/48887#protein2625",
+            "http://www.reactome.org/biopax/48887#protein3991"
     ));
 
     public static void main(String[] args) throws Exception {
