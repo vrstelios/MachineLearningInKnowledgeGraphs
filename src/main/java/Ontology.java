@@ -27,22 +27,11 @@ public class Ontology {
                     "WHERE { ?s ?p ?o }";
 
     private static final String queryNegative =
-            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#>" +
-                    "SELECT DISTINCT ?protein" +
-                    "WHERE {" +
-                    "  ?protein a bp:protein ." +
-                    "  FILTER NOT EXISTS { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein }" +
-                    "} LIMIT 5";
+            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?protein a bp:protein . FILTER NOT EXISTS { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein } } LIMIT 100";
 
 
     private static final String queryPositive =
-            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#>" +
-                    "SELECT DISTINCT ?protein" +
-                    "WHERE {" +
-                    "  ?interaction a bp:catalysis ;" +
-                    "               bp:CONTROLLER ?protein ;" +
-                    "               bp:CONTROL-TYPE \"ACTIVATION\" ." +
-                    "} LIMIT 5"
+            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein ; bp:CONTROL-TYPE \"ACTIVATION\" . } LIMIT 100"
             ;
 
     public static void main(String[] args) {

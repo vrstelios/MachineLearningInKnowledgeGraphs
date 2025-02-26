@@ -1,0 +1,67 @@
+...TBox materialised in 163969 ms.
+start class:⊤
+more accurate (49.75%) class expression found after 89ms: ⊤
+more accurate (80.60%) class expression found after 185ms: physicalEntityParticipant
+more accurate (100.00%) class expression found after 1m12s903ms: ∃ PHYSICAL-ENTITY.⊤
+Algorithm terminated successfully (time: 43200s 48ms, 312709 descriptions tested, 203539 nodes in the search tree).
+
+number of retrievals: 313426
+retrieval reasoning time: 42989s 214ms ( 137ms per retrieval)
+(complex) subsumption checks: 627 (0 multiple)
+subsumption reasoning time: 513ms ( 0ms per subsumption check)
+overall reasoning time: 42989s 728ms
+
+solutions:
+1: ∃ PHYSICAL-ENTITY.⊤ (pred. acc.: 100.00%, F-measure: 100.00%)
+2: ∃ CELLULAR-LOCATION.⊤ (pred. acc.: 100.00%, F-measure: 100.00%)
+3: physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+4: relationshipXref ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+5: relationshipXref ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+6: publicationXref ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+7: publicationXref ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+8: physicalEntityParticipant ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+9: physicalEntityParticipant ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+10: physicalEntityParticipant ⊔ sequenceParticipant ⊔ unificationXref (pred. acc.: 100.00%, F-measure: 100.00%)
+11: physicalEntityParticipant ⊔ sequenceParticipant ⊔ smallMolecule (pred. acc.: 100.00%, F-measure: 100.00%)
+12: physicalEntityParticipant ⊔ sequenceParticipant ⊔ sequenceSite (pred. acc.: 100.00%, F-measure: 100.00%)
+13: physicalEntityParticipant ⊔ sequenceInterval ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+14: physicalEntityParticipant ⊔ sequenceFeature ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+15: physicalEntityParticipant ⊔ rna ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+16: physicalEntityParticipant ⊔ relationshipXref ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+17: physicalEntityParticipant ⊔ publicationXref ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+18: physicalEntity ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+19: physicalEntity ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+20: physicalEntity ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+21: pathwayStep ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+22: pathwayStep ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+23: pathwayStep ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+24: pathway ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+25: pathway ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+26: pathway ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+27: openControlledVocabulary ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+28: openControlledVocabulary ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+29: openControlledVocabulary ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+30: dna ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+31: dna ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+32: dna ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+33: dataSource ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+34: dataSource ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+35: dataSource ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+36: control ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+37: control ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+38: control ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+39: complex ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+40: complex ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+41: complex ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+42: catalysis ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+43: catalysis ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+44: catalysis ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+45: biochemicalReaction ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+46: biochemicalReaction ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+47: biochemicalReaction ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+48: bioSource ⊔ (∃ PHYSICAL-ENTITY.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+49: bioSource ⊔ (∃ CELLULAR-LOCATION.⊤) (pred. acc.: 100.00%, F-measure: 100.00%)
+50: bioSource ⊔ physicalEntityParticipant ⊔ sequenceParticipant (pred. acc.: 100.00%, F-measure: 100.00%)
+
+
+Process finished with exit code 0
