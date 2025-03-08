@@ -31,8 +31,7 @@ public class Ontology {
 
 
     private static final String queryPositive =
-            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein ; bp:CONTROL-TYPE \"ACTIVATION\" . } LIMIT 100"
-            ;
+            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein ; bp:CONTROL-TYPE \"ACTIVATION\" . } LIMIT 100";
 
     public static void main(String[] args) {
 
