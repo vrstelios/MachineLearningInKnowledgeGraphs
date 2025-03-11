@@ -17,9 +17,12 @@ import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
 import java.io.File;
 import java.util.*;
+import java.lang.reflect.Method;
+
 public class DLLearner {
-    private static final Logger logger = Logger.getLogger(DLLearner.class); //για να καταγράφει μηνύματα (logs) διαφόρων σταδίων της διαδικασίας
+    private static final Logger logger = Logger.getLogger(DLLearner.class); // Για καταγραφή μηνυμάτων (logs)
     private static final String kbPathStr = "biopax2/Homo_sapiens.owl";
+    // Θετικά παραδείγματα (φάρμακα ή πρωτεΐνες με θεραπευτική δράση)
     private static final List<String> posExampleUris = new ArrayList<>(Arrays.asList(
             "http://www.reactome.org/biopax/48887#physicalEntityParticipant46853",
             "http://www.reactome.org/biopax/48887#sequenceParticipant35130",
@@ -122,6 +125,7 @@ public class DLLearner {
             "http://www.reactome.org/biopax/48887#physicalEntityParticipant5930",
             "http://www.reactome.org/biopax/48887#sequenceParticipant1611"
     ));
+    // Αρνητικά παραδείγματα (φάρμακα ή πρωτεΐνες χωρίς θεραπευτική δράση)
     private static final List<String> negExampleUris = new ArrayList<>(Arrays.asList(
             "http://www.reactome.org/biopax/48887#protein7672",
             "http://www.reactome.org/biopax/48887#protein4276",
@@ -227,11 +231,6 @@ public class DLLearner {
     ));
 
     public static void main(String[] args) throws Exception {
-        /*OWLOntologyManager man = OWLManager.createOWLOntologyManager();
-        OWLOntology ontology = man.loadOntologyFromOntologyDocument(new File(kbPathStr));
-        for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
-            System.out.println(individual.getIRI());
-        }*/
         setUp();
         run();
     }
@@ -239,83 +238,78 @@ public class DLLearner {
     private static void run() throws OWLOntologyCreationException, ComponentInitException {
         logger.debug("Starting...");
 
-        logger.debug("creating positive and negative examples...");
-        //για να μετατρέψει τα URIs των παραδειγμάτων σε αντικείμενα OWL
+        // Μετατροπή των URIs των παραδειγμάτων σε αντικείμενα OWL
+        logger.debug("Creating positive and negative examples...");
         Set<OWLIndividual> posExamples = makeIndividuals(posExampleUris);
         Set<OWLIndividual> negExamples = makeIndividuals(negExampleUris);
-        logger.debug("finished creating positive and negative examples");
+        logger.debug("Finished creating positive and negative examples");
 
-        logger.debug("reading ontology...");
+        // Φόρτωση της οντολογίας
+        logger.debug("Reading ontology...");
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = man.loadOntologyFromOntologyDocument(new File(kbPathStr));
-        logger.debug("read " + ontology.getAxiomCount() + " axioms");
-        logger.debug("finished reading the ontology");
+        logger.debug("Read " + ontology.getAxiomCount() + " axioms");
+        logger.debug("Finished reading the ontology");
 
-        //δημιουργεί υλικό για περιορισμούς υπαρξιακών συνθηκών.
+        // Δημιουργία υλικού για περιορισμούς υπαρξιακών συνθηκών
         ExistentialRestrictionMaterialization mat = new ExistentialRestrictionMaterialization(ontology);
         System.out.println(mat.materialize("http://purl.obolibrary.org/obo/CHEBI_33560"));
 
-        logger.debug("initializing knowledge source...");
+        // Αρχικοποίηση της πηγής γνώσης
+        logger.debug("Initializing knowledge source...");
         KnowledgeSource ks = new OWLAPIOntology(ontology);
         ks.init();
-        logger.debug("finished initializing knowledge source");
+        logger.debug("Finished initializing knowledge source");
 
-        logger.debug("initializing reasoner...");
+        // Αρχικοποίηση του συλλογιστή
+        logger.debug("Initializing reasoner...");
         OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
         baseReasoner.setUseFallbackReasoner(true);
         baseReasoner.init();
         Logger.getLogger(ElkReasoner.class).setLevel(Level.OFF);
 
-        //Ο λόγος που χρησιμοποιείται είναι η καλύτερη διαχείριση των δεδομένων για την εκμάθηση.
+        // Χρήση ClosedWorldReasoner για καλύτερη διαχείριση δεδομένων
         ClosedWorldReasoner cwReasoner = new ClosedWorldReasoner(ks);
         cwReasoner.setReasonerComponent(baseReasoner);
         cwReasoner.setHandlePunning(false);
         cwReasoner.setUseMaterializationCaching(false);
         cwReasoner.setMaterializeExistentialRestrictions(true);
         cwReasoner.init();
-        logger.debug("finished initializing reasoner component");
+        logger.debug("Finished initializing reasoner component");
 
         AbstractReasonerComponent rc = cwReasoner;
 
-        //αναλαμβάνει να διαμορφώσει το πρόβλημα μάθησης
-        logger.debug("initializing learning problem...");
+        // Αρχικοποίηση του προβλήματος μάθησης
+        logger.debug("Initializing learning problem...");
         PosNegLPStandard lp = new PosNegLPStandard(rc);
         lp.setPositiveExamples(posExamples);
         lp.setNegativeExamples(negExamples);
         lp.init();
-        logger.debug("finished initializing learning problem");
+        logger.debug("Finished initializing learning problem");
 
-
-        logger.debug("initializing learning algorithm...");
+        // Αρχικοποίηση του αλγορίθμου μάθησης (CELOE)
+        logger.debug("Initializing learning algorithm...");
         AbstractCELA la;
 
         OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
         heuristic.setExpansionPenaltyFactor(0.1);
 
-        //πραγματοποιήσει εκμάθηση εννοιών.
         CELOE celoe = new CELOE(lp, rc);
         celoe.setHeuristic(heuristic);
-        celoe.setMaxExecutionTimeInSeconds(60*60*12);
-        celoe.setNoisePercentage(80);
-        celoe.setMaxNrOfResults(50);
-        celoe.setSearchTreeFile("log/reactome-minimal.log");
-//        celoe.setWriteSearchTree(true);
+        celoe.setMaxExecutionTimeInSeconds(60 * 60);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
+        celoe.setNoisePercentage(80);  // Ανοχή σε θόρυβο default(80)
+        celoe.setMaxNrOfResults(100);  // Μέγιστος αριθμός αποτελεσμάτων
+        celoe.setSearchTreeFile("log/drug_discovery.log");  // Αρχείο για την καταγραφή της αναζήτησης
         celoe.setReplaceSearchTree(true);
 
-//        ELLearningAlgorithm elLa = new ELLearningAlgorithm(lp, rc);
-//        elLa.setNoisePercentage(1.0);
-//        elLa.setWriteSearchTree(true);
-//        elLa.setReplaceSearchTree(true);
-//        la = elLa; // celoe;
-
         la = celoe;
-//        Description startClass = new NamedClass("http://dl-learner.org/smallis/Allelic_info");
-        logger.debug("finished initializing learning algorithm");
-        logger.debug("initializing operator...");
+        logger.debug("Finished initializing learning algorithm");
+
+        // Αρχικοποίηση του τελεστή διεύρυνσης
+        logger.debug("Initializing operator...");
         RhoDRDown op = new RhoDRDown();
         op.setInstanceBasedDisjoints(true);
         op.setUseNegation(false);
-//        op.setStartClass(new NamedClass("http://dl-learner.org/smallis/Allelic_info"));
         op.setUseHasValueConstructor(false);
         op.setUseAllConstructor(false);
         op.setReasoner(rc);
@@ -323,28 +317,63 @@ public class DLLearner {
         op.setObjectPropertyHierarchy(rc.getObjectPropertyHierarchy());
         op.setDataPropertyHierarchy(rc.getDatatypePropertyHierarchy());
         op.init();
-        logger.debug("finished initializing operator");
-        if(la instanceof CELOE)
-            ((CELOE) la).setOperator(op);
+        logger.debug("Finished initializing operator");
 
+        if (la instanceof CELOE) {
+            ((CELOE) la).setOperator(op);
+        }
+
+        // Εκκίνηση του αλγορίθμου
         la.init();
         la.start();
+
+        // Εκτύπωση όλων των μεθόδων της κλάσης CELOE
+        for (Method method : CELOE.class.getDeclaredMethods()) {
+            System.out.println("Διαθέσιμες μεθόδους της κλάσης" + method.getName());
+        }
+
+        // Εξαγωγή και εμφάνιση των αποτελεσμάτων
+        if (la instanceof CELOE) {
+            CELOE celoeAlgorithm = (CELOE) la;
+            EvaluatedDescription bestDescription = celoeAlgorithm.getCurrentlyBestEvaluatedDescription();
+            if (bestDescription != null) {
+                System.out.println("Best learned concept: " + bestDescription.getDescription());
+                System.out.println("Accuracy: " + bestDescription.getAccuracy());
+            }
+        } else {
+            // Αυτή η μέθοδος επιστρέφει την καλύτερη έκφραση που έχει βρεθεί μέχρι στιγμής.
+            EvaluatedDescription bestDescription = la.getCurrentlyBestEvaluatedDescription();
+            if (bestDescription != null) {
+                System.out.println("Best learned concept: " + bestDescription.getDescription());
+                System.out.println("Accuracy: " + bestDescription.getAccuracy());
+            }
+        }
+
+        // Ανάλυση πρωτεϊνικών αλληλεπιδράσεων
+        logger.debug("Analyzing protein interactions...");
+        for (OWLAxiom axiom : ontology.getAxioms()) {
+            if (axiom instanceof OWLObjectPropertyAssertionAxiom) {
+                OWLObjectPropertyAssertionAxiom interactionAxiom = (OWLObjectPropertyAssertionAxiom) axiom;
+                System.out.println("Interaction: " + interactionAxiom.getSubject() + " -> " + interactionAxiom.getObject());
+            }
+        }
 
         logger.debug("Finished");
     }
 
+    // Ρύθμιση του περιβάλλοντος
     private static void setUp() {
         logger.setLevel(Level.DEBUG);
         Logger.getLogger(AbstractReasonerComponent.class).setLevel(Level.OFF);
         StringRenderer.setRenderer(Rendering.DL_SYNTAX);
     }
 
+    // Μετατροπή URIs σε αντικείμενα OWLIndividual
     private static Set<OWLIndividual> makeIndividuals(List<String> uris) {
         Set<OWLIndividual> individuals = new HashSet<>();
         for (String uri : uris) {
             individuals.add(new OWLNamedIndividualImpl(IRI.create(uri)));
         }
-
         return individuals;
     }
 }
