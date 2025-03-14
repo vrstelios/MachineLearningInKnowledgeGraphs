@@ -2,104 +2,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>scripts</artifactId>
-  <packaging>jar</packaging>
-
-  <name>Executable scripts</name>
-  <url>http://aksw.org/Projects/DLLearner</url>
-
   <parent>
     <groupId>org.dllearner</groupId>
     <artifactId>dllearner-parent</artifactId>
     <version>1.5.1-SNAPSHOT</version>
   </parent>
 
+  <groupId>org.dllearner</groupId>
+  <artifactId>scripts</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Executable scripts</name>
+  <url>http://aksw.org/Projects/DLLearner</url>
+
   <dependencies>
     <dependency>
       <groupId>org.dllearner</groupId>
       <artifactId>components-core</artifactId>
+      <version>1.5.0</version>
     </dependency>
 
     <dependency>
       <groupId>org.dllearner</groupId>
       <artifactId>interfaces</artifactId>
+      <version>1.5.0</version>
     </dependency>
-
-    <dependency>
-      <groupId>net.sourceforge.secondstring</groupId>
-      <artifactId>secondstring</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.dumontierlab</groupId>
-      <artifactId>pdb2rdf-parser</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.dumontierlab</groupId>
-      <artifactId>pdb2rdf-cli</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>jena</artifactId>
-          <groupId>com.hp.hpl.jena</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>arq</artifactId>
-          <groupId>com.hp.hpl.jena</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-compress</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-math3</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>nz.ac.waikato.cms.weka</groupId>
-      <artifactId>weka-dev</artifactId>
-    </dependency>
-
-    <!--<dependency>
-        <groupId>org.semanticweb.elk</groupId>
-        <artifactId>elk-owlapi</artifactId>
-    </dependency>-->
-
-    <!-- <dependency>
-        <groupId>net.sourceforge.owlapi</groupId>
-        <artifactId>owlapi-reasoner</artifactId>
-        <exclusions>
-            <exclusion>
-                <artifactId>owlapi-api</artifactId>
-                <groupId>net.sourceforge.owlapi</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency>
-    <dependency>
-        <groupId>net.sourceforge.owlapi</groupId>
-        <artifactId>owlapi-util</artifactId>
-        <exclusions>
-            <exclusion>
-                <artifactId>owlapi-api</artifactId>
-                <groupId>net.sourceforge.owlapi</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency> -->
-
-
-
 
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>maven.aksw.internal</id>
+      <name>University Leipzig, AKSW Maven2 Repository</name>
+      <url>https://maven.aksw.org/repository/internal</url>
+      <releases />
+    </repository>
+    <repository>
+      <id>maven.aksw.snapshots</id>
+      <name>University Leipzig, AKSW Maven2 Repository</name>
+      <url>https://maven.aksw.org/repository/snapshots</url>
+      <snapshots />
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
@@ -122,78 +70,77 @@
         </configuration>
       </plugin>
     </plugins>
-
   </build>
 </project>
 
-<!-- <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+        <!-- <project xmlns="http://maven.apache.org/POM/4.0.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.example</groupId>
-  <artifactId>MachineLearningInKnowledgeGraphs</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+          <groupId>org.example</groupId>
+          <artifactId>MachineLearningInKnowledgeGraphs</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <packaging>jar</packaging>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+          <build>
+            <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+                </configuration>
+              </plugin>
+            </plugins>
+          </build>
 
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-    <repository>
-      <id>maven.aksw.internal</id>
-      <name>University Leipzig, AKSW Maven2 Repository</name>
-      <url>https://maven.aksw.org/repository/internal</url>
-      <releases />
-    </repository>
-    <repository>
-      <id>maven.aksw.snapshots</id>
-      <name>University Leipzig, AKSW Maven2 Repository</name>
-      <url>https://maven.aksw.org/repository/snapshots</url>
-      <snapshots />
-    </repository>
-  </repositories>
+          <repositories>
+            <repository>
+              <id>central</id>
+              <url>https://repo.maven.apache.org/maven2</url>
+            </repository>
+            <repository>
+              <id>maven.aksw.internal</id>
+              <name>University Leipzig, AKSW Maven2 Repository</name>
+              <url>https://maven.aksw.org/repository/internal</url>
+              <releases />
+            </repository>
+            <repository>
+              <id>maven.aksw.snapshots</id>
+              <name>University Leipzig, AKSW Maven2 Repository</name>
+              <url>https://maven.aksw.org/repository/snapshots</url>
+              <snapshots />
+            </repository>
+          </repositories>
 
-  <dependencies>
-<dependency>
-<groupId>net.sourceforge.owlapi</groupId>
-<artifactId>owlapi-distribution</artifactId>
-<version>5.1.19</version>
-</dependency>
-<dependency>
-<groupId>net.sourceforge.owlapi</groupId>
-<artifactId>org.semanticweb.hermit</artifactId>
-<version>1.4.5.519</version>
-</dependency>
-<dependency>
-<groupId>org.apache.jena</groupId>
-<artifactId>apache-jena-libs</artifactId>
-<version>4.5.0</version>
-<type>pom</type>
-</dependency>
+          <dependencies>
         <dependency>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-          <version>1.2.3</version>
+        <groupId>net.sourceforge.owlapi</groupId>
+        <artifactId>owlapi-distribution</artifactId>
+        <version>5.1.19</version>
         </dependency>
-<dependency>
-<groupId>org.dllearner</groupId>
-<artifactId>components-core</artifactId>
-<version>1.5.0</version>
-</dependency>
-        </dependencies>
-        </project>-->
+        <dependency>
+        <groupId>net.sourceforge.owlapi</groupId>
+        <artifactId>org.semanticweb.hermit</artifactId>
+        <version>1.4.5.519</version>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.jena</groupId>
+        <artifactId>apache-jena-libs</artifactId>
+        <version>4.5.0</version>
+        <type>pom</type>
+        </dependency>
+                <dependency>
+                  <groupId>ch.qos.logback</groupId>
+                  <artifactId>logback-classic</artifactId>
+                  <version>1.2.3</version>
+                </dependency>
+        <dependency>
+        <groupId>org.dllearner</groupId>
+        <artifactId>components-core</artifactId>
+        <version>1.5.0</version>
+        </dependency>
+                </dependencies>
+                </project>-->
