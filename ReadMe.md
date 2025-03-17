@@ -5,9 +5,9 @@
 ---
 
 ## Prerequisites
-- **Java** 11 ή νεότερη έκδοση.
+- **Java** 17 ή νεότερη έκδοση.
 - **Maven** (για τη διαχείριση των εξαρτήσεων και την εκτέλεση του project).
-
+- **Apache jena fuseki** Για να κάνεις τα SPARQL query στα δεδομένα σού.
 ---
 
 ## Data
@@ -36,6 +36,9 @@
 
 ## Εγκατάσταση
 Run: `mvn clean install`
+Download: `Apache jena fuseki`
+  Run: `cd C:\path\apache-jena-fuseki-5.3.0` and `fuseki-server --update --mem /dataset` 
+  Πήγαινε στο `http://localhost:3030/dataset/sparql` και πρόσθεσε το `BioPax2/Homo_sapiens.owl`
 
 ---
 
