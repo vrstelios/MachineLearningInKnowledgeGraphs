@@ -7,7 +7,7 @@
 ## Prerequisites
 - **Java** 17 ή νεότερη έκδοση.
 - **Maven** (για τη διαχείριση των εξαρτήσεων και την εκτέλεση του project).
-- **Apache jena fuseki** Για να κάνεις τα SPARQL query στα δεδομένα σού.
+- **Apache Jena Fuseki** Για να κάνεις τα SPARQL query στα δεδομένα σού.
 ---
 
 ## Data
