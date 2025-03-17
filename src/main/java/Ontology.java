@@ -17,24 +17,13 @@ public class Ontology {
 
     private static final String query1 = "SELECT DISTINCT ?class WHERE { ?s a ?class . }";
 
-    private static final String query2 =
-            "PREFIX bp: <http://www.biopax.org/release/biopax-level3.owl#> " +
-                    "SELECT ?reaction ?id WHERE { ?reaction a bp:UnificationXref . ?reaction bp:id ?id . } LIMIT 10";
-
-    private static final String query3 =
-            "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> " +
-                    "SELECT (COUNT(*) AS ?tripletCount)" +
-                    "WHERE { ?s ?p ?o }";
-
     private static final String queryNegative =
             "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?protein a bp:protein . FILTER NOT EXISTS { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein } } LIMIT 100";
-
 
     private static final String queryPositive =
             "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein ; bp:CONTROL-TYPE \"ACTIVATION\" . } LIMIT 100";
 
     public static void main(String[] args) {
-
         //loadOntology("OpenPVSignal/WHO_UMC_Pharmaceuticals_Newsletter_2017_3_Ibrutinib_and_pneumonitis.owl");
         loadOntology("biopax2/Homo_sapiens.owl");
         //test("biopax2/Homo_sapiens.owl");
@@ -59,7 +48,7 @@ public class Ontology {
             model.read(new StringReader(rdfString), null, "RDF/XML");
 
             // Execute SPARQL query
-            Query query = QueryFactory.create(queryNegative);
+            Query query = QueryFactory.create(queryPositive);
             QueryExecution qexec = QueryExecutionFactory.create(query, model);
 
             ResultSet results = qexec.execSelect();
