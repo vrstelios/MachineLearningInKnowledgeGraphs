@@ -1,9 +1,9 @@
 # DLLearner
 
 ## Περιγραφή
-Ο DL-Learner υλοποιεί μία διαδικασία **εκμάθησης εννοιών (concept learning)** με χρήση της βιβλιοθήκης DL-Learner.
+Ο DL-Learner[1][2][3] υλοποιεί μία διαδικασία **εκμάθησης εννοιών (concept learning)** εφαρμόζοντας τεχνικές μηχανικής μάθησης (Machine Learning - ML) πάνω σε δεδομένα οντολογιών/γράφους γνώσης.
 
-Πρόκειται για ένα εργαλείο που βοηθάει στην εύρεση περιγραφών (descriptions) με βάση **θετικά και αρνητικά παραδείγματα** που παρέχονται από τον χρήστη. Το πρόγραμμα χρησιμοποιεί αλγορίθμους εκμάθησης εννοιών πάνω σε δεδομένα που βρίσκονται σε μορφή **Web Ontology Language (OWL)**, τα οποία φορτώνονται από ένα αρχείο οντολογίας.
+Ο στόχος του DL-Learner είναι να "μάθει" περιγραφές κλάσεων οι οποίος ικανοποιούν τα **θετικά και αρνητικά παραδείγματα** που παρέχονται από τον χρήστη. Το πρόγραμμα χρησιμοποιεί αλγορίθμους εκμάθησης εννοιών πάνω σε δεδομένα που βρίσκονται σε μορφή **Web Ontology Language (OWL)**, τα οποία φορτώνονται από ένα αρχείο οντολογίας.
 
 ---
 
@@ -79,3 +79,8 @@
 3. Εκτελέστε το πρόγραμμα.
 
 ---
+
+**Αναφορές**
+[1] https://github.com/SmartDataAnalytics/DL-Learner
+[2] DL-Learner—A framework for inductive learning on the Semantic Web https://www.sciencedirect.com/science/article/pii/S157082681630018X?casa_token=gEs60jRrxkMAAAAA:2fq7PPr2cuArBmQ6Uyl0Gqxoa7vOzzqfxdBnj2J9HhayqFMw2VWbanJP6wd1xEbdSdVuKy2ogw
+[3] http://dl-learner.org/Resources/Documents/manual.pdf
