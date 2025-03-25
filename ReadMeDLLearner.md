@@ -86,7 +86,7 @@
 
 ---
 
-# Σενάριο Χρήσης: Αυτόματη Πρόβλεψη Βιολογικών Διαδικασιών σε Pathway Data
+# Σενάριο Χρήσης [6]: Αυτόματη Πρόβλεψη Βιολογικών Διαδικασιών σε Pathway Data
 
 ## Στόχος
 Χρήση του **DL-Learner** για να μάθει κανόνες από δεδομένα **BioPAX** και να:
@@ -140,10 +140,12 @@ SELECT DISTINCT ?protein WHERE {
 
 ---
 
-**Αναφορές**
-[1] https://github.com/SmartDataAnalytics/DL-Learner
-[2] DL-Learner—A framework for inductive learning on the Semantic Web https://www.sciencedirect.com/science/article/pii/S157082681630018X?casa_token=gEs60jRrxkMAAAAA:2fq7PPr2cuArBmQ6Uyl0Gqxoa7vOzzqfxdBnj2J9HhayqFMw2VWbanJP6wd1xEbdSdVuKy2ogw
-[3] http://dl-learner.org/Resources/Documents/manual.pdf
-[4] https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/manual%20dl-learner.pdf
-[5] http://jens-lehmann.org/files/2011/celoe.pdf
+## Αναφορές
+1. [DL-Learner GitHub Repository](https://github.com/SmartDataAnalytics/DL-Learner)
+2. [DL-Learner—A framework for inductive learning on the Semantic Web](https://www.sciencedirect.com/science/article/pii/S157082681630018X?casa_token=gEs60jRrxkMAAAAA:2fq7PPr2cuArBmQ6Uyl0Gqxoa7vOzzqfxdBnj2J9HhayqFMw2VWbanJP6wd1xEbdSdVuKy2ogw)
+3. [DL-Learner Manual](http://dl-learner.org/Resources/Documents/manual.pdf)
+4. [Machine Learning in Knowledge Graphs Manual](https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/manual%20dl-learner.pdf)
+5. [CELOE Algorithm Paper](http://jens-lehmann.org/files/2011/celoe.pdf)
+6. [Web Semantics: Science, Services and Agents on the World Wide Web](https://scispace.com/pdf/web-semantics-science-services-and-agents-on-the-world-wide-1ya8qsgi6b.pdf)
+
 
