@@ -30,7 +30,7 @@ import java.util.Set;
 
 public class DLLearner {
     private static final Logger logger = Logger.getLogger(DLLearner.class); // Για καταγραφή μηνυμάτων (logs)
-    private static final String kbPathStr = "http://localhost:3030/bioPax2/sparql";
+    private static final String kbPathStr = "http://localhost:3030/bioPax2";
 
     // Αρνητικά παραδείγματα (πρωτεΐνες χωρίς θεραπευτική δράση)
     private static final String queryNegative =
