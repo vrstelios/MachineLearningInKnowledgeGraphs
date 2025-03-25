@@ -20,7 +20,10 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -104,7 +107,7 @@ public class DLLearner {
 
         CELOE celoe = new CELOE(lp, rc);
         celoe.setHeuristic(heuristic);
-        celoe.setMaxExecutionTimeInSeconds(60 * 60 * 12);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
+        celoe.setMaxExecutionTimeInSeconds(60 * 60 * 6);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
         celoe.setNoisePercentage(80);  // Ανοχή σε θόρυβο default(80)
         celoe.setMaxNrOfResults(100);  // Μέγιστος αριθμός αποτελεσμάτων
         celoe.setSearchTreeFile("log/drug_discovery.log");  // Αρχείο για την καταγραφή της αναζήτησης
@@ -150,30 +153,40 @@ public class DLLearner {
             System.out.println("Individual: " + individual);
         }*/
 
-        // Εξαγωγή και εμφάνιση των αποτελεσμάτων
-        if (la instanceof CELOE) {
-            CELOE celoeAlgorithm = (CELOE) la;
-            EvaluatedDescription bestDescription = celoeAlgorithm.getCurrentlyBestEvaluatedDescription();
-            if (bestDescription != null) {
-                System.out.println("Best learned concept: " + bestDescription.getDescription());
-                System.out.println("Accuracy: " + bestDescription.getAccuracy());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DLlearner-results.txt"))) {
+            // Εξαγωγή και εμφάνιση των αποτελεσμάτων
+            if (la instanceof CELOE) {
+                CELOE celoeAlgorithm = (CELOE) la;
+                EvaluatedDescription bestDescription = celoeAlgorithm.getCurrentlyBestEvaluatedDescription();
+                if (bestDescription != null) {
+                    writer.write("Best learned concept: " + bestDescription.getDescription());
+                    writer.newLine();
+                    writer.write("Accuracy: " + bestDescription.getAccuracy());
+                    writer.newLine();
+                }
+            } else {
+                // Αυτή η μέθοδος επιστρέφει την καλύτερη έκφραση που έχει βρεθεί μέχρι στιγμής.
+                EvaluatedDescription bestDescription = la.getCurrentlyBestEvaluatedDescription();
+                if (bestDescription != null) {
+                    writer.write("Best learned concept: " + bestDescription.getDescription());
+                    writer.newLine();
+                    writer.write("Accuracy: " + bestDescription.getAccuracy());
+                    writer.newLine();
+                }
             }
-        } else {
-            // Αυτή η μέθοδος επιστρέφει την καλύτερη έκφραση που έχει βρεθεί μέχρι στιγμής.
-            EvaluatedDescription bestDescription = la.getCurrentlyBestEvaluatedDescription();
-            if (bestDescription != null) {
-                System.out.println("Best learned concept: " + bestDescription.getDescription());
-                System.out.println("Accuracy: " + bestDescription.getAccuracy());
-            }
-        }
 
-        // Ανάλυση πρωτεϊνικών αλληλεπιδράσεων
-        logger.debug("Analyzing protein interactions...");
-        for (OWLAxiom axiom : ontology.getAxioms()) {
-            if (axiom instanceof OWLObjectPropertyAssertionAxiom) {
-                OWLObjectPropertyAssertionAxiom interactionAxiom = (OWLObjectPropertyAssertionAxiom) axiom;
-                System.out.println("Interaction: " + interactionAxiom.getSubject() + " -> " + interactionAxiom.getObject());
+            // Ανάλυση πρωτεϊνικών αλληλεπιδράσεων
+            writer.write("Analyzing protein interactions...");
+            writer.newLine();
+            for (OWLAxiom axiom : ontology.getAxioms()) {
+                if (axiom instanceof OWLObjectPropertyAssertionAxiom) {
+                    OWLObjectPropertyAssertionAxiom interactionAxiom = (OWLObjectPropertyAssertionAxiom) axiom;
+                    writer.write("Interaction: " + interactionAxiom.getSubject() + " -> " + interactionAxiom.getObject());
+                    writer.newLine();
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         logger.debug("Finished");
