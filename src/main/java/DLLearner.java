@@ -27,12 +27,13 @@ import java.util.Set;
 
 public class DLLearner {
     private static final Logger logger = Logger.getLogger(DLLearner.class); // Για καταγραφή μηνυμάτων (logs)
-    private static final String kbPathStr = "biopax2/Homo_sapiens.owl";
-    // Θετικά παραδείγματα (πρωτεΐνες με θεραπευτική δράση)
+    private static final String kbPathStr = "http://localhost:3030/bioPax2/sparql";
+
+    // Αρνητικά παραδείγματα (πρωτεΐνες χωρίς θεραπευτική δράση)
     private static final String queryNegative =
             "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?protein a bp:protein . FILTER NOT EXISTS { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein } } LIMIT 100";
 
-    // Αρνητικά παραδείγματα (πρωτεΐνες χωρίς θεραπευτική δράση)
+    // Θετικά παραδείγματα (πρωτεΐνες με θεραπευτική δράση)
     private static final String queryPositive =
             "PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#> SELECT DISTINCT ?protein WHERE { ?interaction a bp:catalysis ; bp:CONTROLLER ?protein ; bp:CONTROL-TYPE \"ACTIVATION\" . } LIMIT 100";
 
@@ -103,7 +104,7 @@ public class DLLearner {
 
         CELOE celoe = new CELOE(lp, rc);
         celoe.setHeuristic(heuristic);
-        celoe.setMaxExecutionTimeInSeconds(60);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
+        celoe.setMaxExecutionTimeInSeconds(60 * 60 * 12);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
         celoe.setNoisePercentage(80);  // Ανοχή σε θόρυβο default(80)
         celoe.setMaxNrOfResults(100);  // Μέγιστος αριθμός αποτελεσμάτων
         celoe.setSearchTreeFile("log/drug_discovery.log");  // Αρχείο για την καταγραφή της αναζήτησης
