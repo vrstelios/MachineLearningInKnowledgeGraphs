@@ -8,6 +8,7 @@
 - **Java** 17 ή νεότερη έκδοση.
 - **Maven** (για τη διαχείριση των εξαρτήσεων και την εκτέλεση του project).
 - **Apache Jena Fuseki** Για να κάνεις τα SPARQL query στα δεδομένα σού.
+
 ---
 
 ## Data
@@ -29,21 +30,21 @@
 ## Περιέχει δυο εκτελέσιμα αρχεία
 - **Ontology**: Για να μπορούμε να κάνουμε query και να παίρνουμε συγκεκριμένα δεδομένα απο την Οντολογία μας.
 - **DLLearner**: Για να μπορούμε να εντοπίζουμε λογικές εκφράσεις που περιγράφουν τις έννοιες που αντιπροσωπεύουν
-τα θετικά παραδείγματα και να κάνουμε εκμάθησης εννοιών για την συγκεκριμένη οντολογία που φορτώνουμε στο DLLearner.
-
+  τα θετικά παραδείγματα και να κάνουμε εκμάθησης εννοιών για την συγκεκριμένη οντολογία που φορτώνουμε στο DLLearner.
 
 ---
 
 ## Εγκατάσταση
-Run: `mvn clean install`
-Download: `Apache jena fuseki`
-  Run: `cd C:\path\apache-jena-fuseki-5.3.0` and `fuseki-server --update --mem /dataset` 
-  Πήγαινε στο `http://localhost:3030/dataset/sparql` και πρόσθεσε το `BioPax2/Homo_sapiens.owl`
 
----
+Ακολούθησε τα παρακάτω βήματα για να εγκαταστήσεις και να ρυθμίσεις το project.
 
+### 1. Εγκατάσταση Εξαρτήσεων
+Εκτέλεσε την παρακάτω εντολή για να εγκαταστήσεις τις απαραίτητες εξαρτήσεις:
 
-
-
-
-
+```bash
+mvn clean install
+install apache-jena-fuseki-5.3.0
+cd C:\path\apache-jena-fuseki-5.3.0 
+fuseki-server --update --mem /dataset
+```
+Άνοιξε τον browser σου και πήγαινε στη διεύθυνση:`http://localhost:3030/dataset/sparql` και πρόσθεσε το αρχείο `Reactome/BioPax2/Homo_sapiens.owl` στο dataset.
