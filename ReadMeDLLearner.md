@@ -12,6 +12,8 @@
 ## CELOE 
 Ο CELOE [5] είναι ένας ισχυρός αλγόριθμος που συνδυάζει τεχνικές μηχανικής μάθησης με τις αρχές της περιγραφικής λογικής (description logics) για να βοηθήσει στη δημιουργία και τη βελτίωση οντολογιών. Η ενσωμάτωσή του σε δημοφιλή εργαλεία όπως το Protégé και το OntoWiki τον καθιστά προσβάσιμο και χρήσιμο για τους μηχανικούς γνώσης που εργάζονται στον τομέα του Semantic Web.
 
+Αν θέλετε να μάθετε περισσότερα για τον CELOE διαβάστε το ReadMeCELOE.md [8]
+
 ---
 
 ## ELTL
@@ -143,5 +145,7 @@ SELECT DISTINCT ?protein WHERE {
 4. [Machine Learning in Knowledge Graphs Manual](https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/manual%20dl-learner.pdf)
 5. [CELOE Algorithm Paper](http://jens-lehmann.org/files/2011/celoe.pdf)
 6. [Web Semantics: Science, Services and Agents on the World Wide Web](https://scispace.com/pdf/web-semantics-science-services-and-agents-on-the-world-wide-1ya8qsgi6b.pdf)
+7. [celoe](https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/)
+8. [ReadMeCELOE]()
 
 
