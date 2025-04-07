@@ -146,6 +146,6 @@ SELECT DISTINCT ?protein WHERE {
 5. [CELOE Algorithm Paper](http://jens-lehmann.org/files/2011/celoe.pdf)
 6. [Web Semantics: Science, Services and Agents on the World Wide Web](https://scispace.com/pdf/web-semantics-science-services-and-agents-on-the-world-wide-1ya8qsgi6b.pdf)
 7. [celoe](https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/)
-8. [ReadMeCELOE]()
+8. [ReadMeCELOE](https://github.com/vrstelios/MachineLearningInKnowledgeGraphs/blob/master/ReadMeCELOE.md)
 
 
