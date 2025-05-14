@@ -84,7 +84,7 @@
 
 ---
 
-# Σενάριο Χρήσης [6]: Αυτόματη Πρόβλεψη Βιολογικών Διαδικασιών σε Pathway Data
+# Σενάριο Χρήσης (1) [6]: Αυτόματη Πρόβλεψη Βιολογικών Διαδικασιών σε Pathway Data
 
 ## Στόχος
 Χρήση του **DL-Learner** για να μάθει κανόνες από δεδομένα **BioPAX** και να:
@@ -116,6 +116,62 @@ SELECT DISTINCT ?protein WHERE {
               bp:CONTROLLER ?protein ;
               bp:CONTROL-TYPE "ACTIVATION" .
 } LIMIT 100
+```
+
+## Βήμα 2: Εκπαίδευση Μοντέλου με DL-Learner
+1. Χρησιμοποίησε τα δεδομένα από τα ερωτήματα **SPARQL** ως παραδείγματα εκπαίδευσης.
+2. Εκπαίδευσε τον αλγόριθμο **CELOE** του DL-Learner με αυτά τα δεδομένα.
+
+
+## Βήμα 3: Εμπλουτισμός Οντολογίας
+- Χρησιμοποίησε τους κανόνες που έμαθε το **DL-Learner**.
+- Πρότεινε νέες αξιώσεις στη βάση δεδομένων **BioPAX**.
+---
+
+# Σενάριο Χρήσης (2): Αυτόματη Πρόβλεψη Μετα-Μεταφραστικές Τροποποιήσεις σε Pathway Data
+
+# Μετα-Μεταφραστικές Τροποποιήσεις Πρωτεϊνών
+Οι μετα-μεταφραστικές τροποποιήσεις είναι χημικές αλλαγές που συμβαίνουν μετά τη σύνθεση
+μιας πρωτεΐνης από το ριβόσωμα. Αυτές οι τροποποιήσεις είναι κρίσιμες για τη λειτουργία, 
+τη δομή και τον έλεγχο των πρωτεϊνών.
+
+## Στόχος
+Χρήση του **DL-Learner** για να μάθει κανόνες από δεδομένα **BioPAX** και να:
+- Προβλέψει νέες αλληλεπιδράσεις.
+- Εμπλουτίσει υπάρχουσες οντολογίες.
+
+
+## Βήμα 1: Προετοιμασία Δεδομένων
+- **Θετικά Παραδείγματα**: Πρωτεΐνες που συμμετέχουν σε συγκεκριμένες διαδικασίες.
+- **Αρνητικά Παραδείγματα**: Πρωτεΐνες που δεν συνδέονται με τη διαδικασία.
+
+### Αρνητικά Παραδείγματα
+```sparql
+PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#>
+SELECT DISTINCT ?protein
+WHERE {
+  ?protein a bp:protein .
+  FILTER NOT EXISTS {
+    ?participant a bp:sequenceParticipant ;
+                 bp:PHYSICAL-ENTITY ?protein ;
+                 bp:SEQUENCE-FEATURE-LIST ?feature .
+    ?feature a bp:sequenceFeature .
+  }
+} LIMIT 100
+```
+
+### Θετικά Παραδείγματα
+```sparql
+PREFIX bp: <http://www.biopax.org/release/biopax-level2.owl#>
+SELECT DISTINCT ?protein ?feature
+WHERE {
+  ?participant a bp:sequenceParticipant ;
+               bp:PHYSICAL-ENTITY ?protein ;
+               bp:SEQUENCE-FEATURE-LIST ?feature .
+  ?protein a bp:protein .
+  ?feature a bp:sequenceFeature .
+}
+LIMIT 100
 ```
 
 ## Βήμα 2: Εκπαίδευση Μοντέλου με DL-Learner
