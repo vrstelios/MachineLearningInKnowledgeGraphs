@@ -111,7 +111,7 @@ public class DLLearner {
 
         CELOE celoe = new CELOE(lp, rc);
         celoe.setHeuristic(heuristic);
-        celoe.setMaxExecutionTimeInSeconds(60);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
+        celoe.setMaxExecutionTimeInSeconds(60 * 60 * 12);  // Μέγιστος χρόνος εκτέλεσης default(60 * 60 * 12)
         celoe.setNoisePercentage(80);  // Ανοχή σε θόρυβο default(80)
         celoe.setMaxNrOfResults(100);  // Μέγιστος αριθμός αποτελεσμάτων
         celoe.setSearchTreeFile("log/drug_discovery.log");  // Αρχείο για την καταγραφή της αναζήτησης
@@ -157,7 +157,7 @@ public class DLLearner {
             System.out.println("Individual: " + individual);
         }*/
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DLlearner-results.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DL-learner-scenario2-results.txt"))) {
             // Εξαγωγή και εμφάνιση των αποτελεσμάτων
             if (la instanceof CELOE) {
                 CELOE celoeAlgorithm = (CELOE) la;
