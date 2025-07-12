@@ -1,0 +1,10 @@
+==========================================
+     FINAL CLASSIFICATION RESULTS
+==========================================
+Accuracy  : 0.600
+Precision : 0.615
+Recall    : 0.533
+F1-score  : 0.571
+AUC       : 0.600
+
+Process finished with exit code 0
