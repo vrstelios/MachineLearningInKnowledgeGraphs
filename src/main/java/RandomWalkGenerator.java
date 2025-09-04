@@ -12,10 +12,10 @@ public class RandomWalkGenerator {
 
     // Επιστρέφει το πλήρες URI μιας οντότητας.
     private String getFullURI(OWLEntity entity) {
-        return entity.getIRI().toString(); // Πλήρες URI
+        return entity.getIRI().toString();
     }
 
-    // Δημιουργία walks για όλες τις οντότητες (Individuals, Classes, Properties)
+    // Δημιουργία walks για όλες τις οντότητες (Individuals, Classes)
     public List<List<String>> generateWalks(OWLOntology ontology) {
         List<List<String>> walks = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class RandomWalkGenerator {
         Set<OWLNamedIndividual> individuals = ontology.getIndividualsInSignature();
         for (OWLNamedIndividual individual : individuals) {
             for (int i = 0; i < walksPerEntity; i++) {
-                List<String> walk = performWalk(individual, ontology, 10); // Βάθος 10
+                List<String> walk = performWalk(individual, ontology, 10);
                 if (!walk.isEmpty()) walks.add(walk);
             }
         }
@@ -32,7 +32,7 @@ public class RandomWalkGenerator {
         Set<OWLClass> classes = ontology.getClassesInSignature();
         for (OWLClass owlClass : classes) {
             for (int i = 0; i < walksPerEntity; i++) {
-                List<String> walk = performWalk(owlClass, ontology, 5); // Βάθος 5
+                List<String> walk = performWalk(owlClass, ontology, 5);
                 if (!walk.isEmpty()) walks.add(walk);
             }
         }

@@ -87,8 +87,8 @@ public class EvaluationModel {
 
         // 5. Ρύθμιση Random Forest
         Properties params = new Properties();
-        params.setProperty("smile.random.forest.trees", "200"); // Αύξηση δέντρων
-        params.setProperty("smile.random.forest.node.size", "5"); // Μικρότερα leaves
+        params.setProperty("smile.random.forest.trees", "200");
+        params.setProperty("smile.random.forest.node.size", "5");
         System.out.println("Class weights: " + Arrays.toString(classWeights));
 
         RandomForest forest = RandomForest.fit(Formula.lhs("label"), trainData, params);
